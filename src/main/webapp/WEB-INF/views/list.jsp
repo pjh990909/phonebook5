@@ -32,10 +32,10 @@
 			</tr>
 			<tr>
 				<td><a
-					href="">[삭제]</a>
+					href="/phonebook5/phone/delete?no=${personVo.personId}">[삭제]</a>
 				</td>
 				<td><a
-					href="">[수정]</a>
+					href="/phonebook5/phone/modifyform?no=${personVo.personId}&name=${personVo.name}&hp=${personVo.hp}&company=${personVo.company}">[수정]</a>
 				</td>
 			</tr>
 	
