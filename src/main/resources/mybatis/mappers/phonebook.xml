@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="phonebook">
+	<!-- persoVo 매핑 -->
+	<resultMap id="resultMapPersonVo" type="PersonVo">
+		<result column="person_id" property="personId"></result>
+		<result column="name" property="name"></result>
+		<result column="hp" property="hp"></result>
+		<result column="company" property="company"></result>
+	</resultMap>
+
+
+	<!-- 전체리스트 가져오기 -->
+	<select id="select" resultMap="resultMapPersonVo">
+		<![CDATA[
+			select person_id,
+				   name,
+				   hp,
+				   company
+			from person
+		]]>
+	</select>
+
+	<!-- 등록 -->
+	<insert id="insert" parameterType="PersonVo">
+		<![CDATA[
+			INSERT INTO person
+			VALUES (null,#{name}, #{hp}, #{company})
+		]]>
+	</insert>
+
+	<!-- 등록 map사용 -->
+	<insert id="insert2" parameterType="map">
+		<![CDATA[
+			INSERT INTO person
+			VALUES (null,#{name}, #{hp}, #{company})
+		]]>
+	</insert>
+	
+	<!-- 수정폼 1명 저장 -->
+	<select id="selectOne" parameterType="int" resultMap="resultMapPersonVo">
+		<![CDATA[
+			select person_id,
+			       name,
+		           hp,
+		           company
+			from person
+			where person_id = #{no}
+		]]>
+	</select>
+	
+	<!-- 수정폼 1명 저장 -->
+	<select id="selectOne2" parameterType="int" resultType="map">
+		<![CDATA[
+			select person_id as personId,
+			       name,
+		           hp,
+		           company
+			from person
+			where person_id = #{no}
+		]]>
+	</select>
+	
+	
+	
+	<!-- 수정 -->
+	<update id="update" parameterType="PersonVo">
+		<![CDATA[
+			update person
+			set name = #{name} ,
+				hp = #{hp},
+	    		company = #{company}
+			where person_id = #{personId} ;
+		]]>
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="delete" parameterType="PersonVo">
+		<![CDATA[
+			delete from person
+			where person_id = #{no};
+		]]>
+	</delete>
+	
+</mapper>
